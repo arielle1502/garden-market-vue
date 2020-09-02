@@ -12,7 +12,7 @@ module.exports = {
         storage: './grocerydelivery.sqlite',
         }
   },
-  auth: {
+  authentication: {
     jwtSecret: process.env.JWT_SECRET || 'secret'
   }
   }
