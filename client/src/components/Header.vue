@@ -3,18 +3,22 @@
     <!--Navbar-->
     <b-navbar
       toggleable="sm"
-      type="light"
-      variant="light"
       fixed="top"
       class="shadow-lg border-bottom"
     >
-      <b-navbar-brand to="/">Vue Project</b-navbar-brand>
+      <b-navbar-brand to="/"><img src="@/assets/2.JPG" width="350" height="78" class="d-inline-block align-top" alt="" ></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav center>
+          <b-nav-item>
           <router-link to="/browse">Browse</router-link>
+          </b-nav-item>
+
+           <b-nav-item>
+        <router-link to="/Register">Sell</router-link>
+      </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
