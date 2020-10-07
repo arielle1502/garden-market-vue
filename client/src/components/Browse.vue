@@ -1,7 +1,7 @@
 <template>
  <div>
     <panel title="Browse" class="mt-5">
-      <div v-for="instructionGuide in instructionGuides" v-bind:key="instructionGuide.title">
+      <div v-for="instructionGuide in instructionGuides" v-bind:key="instructionGuide.id">
         {{instructionGuide.title}}
         {{instructionGuide.author}}
         {{instructionGuide.category}}
@@ -22,7 +22,7 @@ export default {
   }},
   components: { Panel },
   async mounted(){
-    this.instructionGuides = await InstructionGuidesService.getAllInstructionGuides();
+    this.instructionGuides = (await InstructionGuidesService.getAllInstructionGuides()).data;
   }
 };
 </script>
