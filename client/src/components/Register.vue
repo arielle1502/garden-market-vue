@@ -5,8 +5,15 @@
         <!--Login Bootstrap Card-->
         <b-card class="text-center shadow-lg bg-light mt-5">
           <h4 slot="header" class="text-primary m-0">Register</h4>
+           
+            <b-form-input type="text" name="username" placeholder="Username" v-model="username"></b-form-input>
           <b-form-input type="email" name="email" placeholder="email" v-model="email" class="mb-3"></b-form-input>
           <b-form-input type="password" name="password" placeholder="password" v-model="password"></b-form-input>
+           <b-form-input type="text" name="street" placeholder="Street Address" v-model="street"></b-form-input>
+           <b-form-input type="text" name="city" placeholder="City" v-model="city"></b-form-input>
+           <b-form-select id="state" type="text" name="state" v-model="state" :options="stateOptions"></b-form-select>
+           <b-form-input type="number" name="postal" placeholder="Postal Code" v-model="postal"></b-form-input>
+           <b-form-input type="text" name="profileimg" placeholder="Profile Image" v-model="profileimg"></b-form-input>
           <!-- Errors display div-->
           <b-card-text
             v-html="error"
@@ -26,17 +33,37 @@ export default {
   name: "Register",
   data() {
     return {
-      email: "test@test.com",
-      password: "password",
+      username: null,
+      email: null,
+      password: null,
+      street: null,
+      city: null,
+      state: null, stateOptions: [
+          { value: null, text: 'State' },
+          { value: 'vic', text: 'VIC' },
+          { value: 'nsw', text: 'NSW' },
+          { value: 'wa', text: 'WA' },
+          { value: 'qld', text: 'QLD' },
+          { value: 'act', text: 'ACT' },
+          { value: 'nt', text: 'NT' }
+        ],
+      postal:null,
+      profileimg: null,
       error: null,
-    };
+    }
   },
   methods: {
     async register() {
       try {
         await AuthenticationService.register({
+          username: this.username,
           email: this.email,
           password: this.password,
+          street: this.street,
+          city: this.city,
+          state: this.state,
+          postal: this.postal,
+          profileimg: this.profileimg
         });
       } catch (error) {
         console.log(error);

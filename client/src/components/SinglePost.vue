@@ -43,16 +43,10 @@
             <!-- end post icon col -->
             <!-- post bottom -->
             <b-row class="align-items-center post-bottom">
-            <b-col cols="4" class="price-bottom"><p>$5.00/dozen</p></b-col>
-            
-            <b-col cols="4" class="img-bottom justify-content-center">
-              
-              <img :src="userImg" class="rounded-circle img-responsive" alt="">
-              <p>Jayde Gray</p>
-             
-             </b-col>
-            <b-col cols="4" class="text-center">
-              <b-button type="button" class="btn btn-lg btn-post">More</b-button>
+            <b-col cols="6" class="price-bottom"><p>$5.00/dozen</p></b-col>
+           
+            <b-col cols="6" class="text-center">
+              <p>{{post.description}}</p>
               </b-col>
           </b-row>
             <!-- end post-bottom -->
@@ -71,10 +65,15 @@ export default {
     return{
       postImg: postImg,
       postIcon: postIcon,
-      userImg: userImg
-    }
-  },
- 
+      userImg: userImg,
+      post: null
+  }},
+  async mounted() {
+    const postId = this.$store.state.route.params.postId;
+    console.log(postId)
+    this.post = 
+    (await PostsService.getPostById(postId)).data;
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 const AuthenticationController = require('./controllers/AuthenticationController');
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
-const InstructionGuideController = require('./controllers/InstructionGuideController')
+const PostController = require('./controllers/PostController')
 
 module.exports = (app) => {
 
@@ -12,7 +12,8 @@ module.exports = (app) => {
     app.post('/login', 
     AuthenticationController.login);
 
-    app.get('/instructionguides', InstructionGuideController.getAllInstructionGuides)
-    app.post('/instructionguides', InstructionGuideController.postInstructionGuides)
+    app.get('/posts', PostController.getAllPosts)
+    app.post('/posts', PostController.postPosts)
+    app.get('/posts/:postId', PostController.getPostById)
     
 }

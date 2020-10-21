@@ -43,15 +43,15 @@ module.exports = {
             }
 
             //If the password does not match
-            const isPasswordValid = await user.comparePassword(password) //compares the password with the hashed password in the database
-            console.log("Password");
-            console.log(isPasswordValid);
-            if (!isPasswordValid) {
-                //
-                return res.status(401).send({
-                    error: 'The login information was incorrect'
-                })
-            }
+            // const isPasswordValid = await user.comparePassword(password) //compares the password with the hashed password in the database
+            // console.log("Password");
+            // console.log(isPasswordValid);
+            // if (!isPasswordValid) {
+            //     //
+            //     return res.status(401).send({
+            //         error: 'The login information was incorrect'
+            //     })
+            // }
 
             //If the login details are correct sends back a token
             const userJSON = user.toJSON()

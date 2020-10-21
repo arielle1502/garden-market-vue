@@ -17,8 +17,10 @@
           </b-nav-item>
 
            <b-nav-item>
-        <router-link to="/Register">Sell</router-link>
-      </b-nav-item>
+        <router-link  v-if="$store.state.isUserLoggedIn" to="/createpost">Sell</router-link>
+        <router-link v-else to="/register">Sell</router-link>
+          </b-nav-item>
+      
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

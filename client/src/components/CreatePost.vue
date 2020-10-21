@@ -93,20 +93,20 @@
 import panelImg from '@/assets/77.png';
 import CreatePostForm from './CreatePostForm'
 
-// import InstructionGuidesService from '@/services/InstructionGuidesService'
+import PostsService from '@/services/PostsService'
 export default {
-  name: "Browse",
+  name: "createpost",
   components: {CreatePostForm},
   data() {
     return{
       panelImg: panelImg,
       
-    // instructionGuides: null
+    posts: null
   }},
   // components: { Panel },
-  // async mounted(){
-  //   this.instructionGuides = (await InstructionGuidesService.getAllInstructionGuides()).data;
-  // }
+  async mounted(){
+    this.posts = (await PostsService.getAllPosts()).data;
+  }
 };
 </script>
 

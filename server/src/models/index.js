@@ -35,5 +35,17 @@ fs
 db.sequelize = sequelize // This will allow us to access the sequelize object if we use this module
 db.Sequelize = Sequelize // This will allow us to access the Sequelize class if we use this module
 
+User = require("./User")(sequelize, Sequelize);
+Post = require("./Post")(sequelize, Sequelize);
+
+User.hasMany(Post, {
+  as: 'posts',
+  foreignKey: 'UserId'
+});
+
+Post.belongsTo(User);
+
+
+
 //Exports
 module.exports = db

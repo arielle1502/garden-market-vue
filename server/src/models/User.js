@@ -23,9 +23,19 @@ module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User',
         //Defines the user model
         {
+            username: { type: DataTypes.STRING },
             email: { type: DataTypes.STRING, unique: true },
-            password: { type: DataTypes.STRING }
+            password: { type: DataTypes.STRING },
+            street: { type: DataTypes.STRING },
+            city: { type: DataTypes.STRING },
+            state: { type: DataTypes.STRING },
+            postal: { type: DataTypes.INTEGER },
+            profileimg: { type: DataTypes.STRING },
+            UserId: { type: DataTypes.INTEGER }
+            
+           
         },
+        {freezeTableName: true},
         //Hooks allow us to run functions when a event occurs
         {
             hooks: {
@@ -36,14 +46,14 @@ module.exports = (sequelize, DataTypes) => {
         })
     //Here we are attaching a method to the User Model under prototype
     //This way we can access comparePassword wherever we have the user model
-    User.prototype.comparePassword = async function (password) {
-        try {
-            const validPassword = await bcrypt.compare(password, this.password);
-            return validPassword;
-        } catch (error) {
-            console.log("Wrong password");
-        }
-    }
-
+    // User.prototype.comparePassword = async function (password) {
+    //     try {
+    //         const validPassword = await bcrypt.compare(password, this.password);
+    //         return validPassword;
+    //     } catch (error) {
+    //         console.log("Wrong password");
+    //     }
+    // }
+  
     return User
-}
+  }

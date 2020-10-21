@@ -10,6 +10,7 @@ module.exports = {
         dialect: process.env.DIALECT || 'sqlite',
         host: process.env.HOST || 'localhost',
         storage: './grocerydelivery.sqlite',
+        
         }
   },
   authentication: {
