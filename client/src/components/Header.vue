@@ -6,7 +6,7 @@
       fixed="top"
       class="border-bottom"
     >
-      <b-navbar-brand to="/"><img :src="logo" width="350" height="78" class="d-inline-block align-top" alt="" ></b-navbar-brand>
+      <b-navbar-brand to="/browse"><img :src="logo" width="350" height="78" class="d-inline-block align-top" alt="" ></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -29,7 +29,7 @@
             <!-- the if statement below checks to see if we are logged in, if we are then the register and login button will not show -->
             <router-link v-if="!$store.state.isUserLoggedIn" to="/login" class="btn login mr-2">Login</router-link>
             <router-link v-if="!$store.state.isUserLoggedIn" to="/register" class="btn signup">Register</router-link>
-             <b-button v-if="$store.state.isUserLoggedIn" @click="logout" class="btn">Log Out</b-button>
+             <b-button v-if="$store.state.isUserLoggedIn" @click="logout" class="btn logout">Log Out</b-button>
           </b-nav-form>
         </b-navbar-nav>
       </b-collapse>
@@ -44,7 +44,7 @@
     </template>
 
     <router-link v-if="!$store.state.isUserLoggedIn" to="/register" class="btn signup">Become a Seller</router-link>
-    <router-link v-if="$store.state.isUserLoggedIn" to="/" class="btn signup">Make a Post</router-link>
+    <router-link v-if="$store.state.isUserLoggedIn" to="/createpost" class="btn signup">Make a Post</router-link>
   </b-jumbotron>
 </div>
 
@@ -72,7 +72,7 @@ export default {
       this.$store.dispatch('setToken', null);
       this.$store.dispatch('setUser', null);
       // when someone clicks on the logout button we clear our vuex state adn send them to the homepage
-      this.$router.push({name: 'root'})
+      // this.$router.push({name: 'browse'})
     }
   }
 }
@@ -85,6 +85,9 @@ export default {
 .navbar{
   background-color:#DFEFE1;
   font-family: 'Mulish', sans-serif;
+   -webkit-box-shadow: 0 8px 6px -6px rgb(114, 114, 114);
+    -moz-box-shadow: 0 8px 6px -6px rgb(114, 114, 114);
+    box-shadow: 0 8px 6px -6px rgb(114, 114, 114);
 }
 
 
@@ -107,6 +110,7 @@ a{
 .jumbotron{
   padding-top:7rem;
   background-size: cover;
+  border-radius:0;
 }
 .jumbotron h1{
   font-size:2.5rem;
@@ -116,5 +120,20 @@ a{
 .jumbotron p{
   font-family: 'Mulish', sans-serif;
   color:#EDF5EE;
+}
+.navbar-collapse >>> .form-inline{
+  display:inline;
+}
+.logout{
+  background-color:#f7ae84;
+  border:none;
+}
+.logout:hover{
+  background-color:#ED5E09;
+}
+@media (max-width:500px){
+  .jumbotron h1 {
+    margin-top: 3rem;
+}
 }
 </style>

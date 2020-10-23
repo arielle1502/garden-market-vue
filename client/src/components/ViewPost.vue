@@ -2,11 +2,11 @@
  <div>
   <b-container fluid>
     <b-row class="outer-row">
-      <b-col cols="12" md="4" lg="3" id="sidebarMenu" class=" ml-3 d-md-block sidebar" align-h="start">
+      <b-col cols="12" md="4" lg="3" id="sidebarMenu" class="d-md-block sidebar" align-h="start">
         <div class="sidebar-sticky pt-3">
           <!-- back to browse button -->
               <div>
-       <b-button block class="btn-filter">Back To Browse</b-button>
+       <router-link to="/browse" block class="btn btn-filter">Back To Browse</router-link>
        </div>
                <!-- end back to browse button -->
                <!-- panel heading -->
@@ -31,9 +31,12 @@
                 </div>   
           </b-col>
         <!-- main section -->
-        <b-col cols="12" md="7" lg="8">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">{{post.title}}</h1>
+        <b-col cols="12" md="8" lg="9" >
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom bottom">
+          <h1 class="main-heading">{{post.author}}'s Post</h1> 
+          <span v-if="post.UserId === user" class="d-flex"> <router-link :to="'/browse/' + post.id + '/edit'" type="button" class="btn btn-lg btn-post">Edit</router-link><b-button @click="deletePost" type="button" class="btn btn-lg btn-post">Delete</b-button></span>
+           
+         
           </div>
         <SinglePost/>
           
@@ -47,7 +50,7 @@
 <script>
 import panelImg from '@/assets/77.png';
 import lettuce from '@/assets/lettuce.png';
-
+// import { mapState } from 'vuex';
 import SinglePost from './SinglePost'
 import PostsService from '@/services/PostsService'
 export default {
@@ -59,12 +62,44 @@ export default {
       lettuce: lettuce,
       post: null
   }},
+   computed: {
+     user: function(){
+       if(this.$store.state.isUserLoggedIn === true){
+         return this.$store.state.user.id}
+         else{
+           console.log('user is not signed in')
+         }
+         return null;
+  }},
+  methods: {
+    async deletePost(){
+      //validation check
+      // this.$v.instructionGuide.$touch();
+      // if(this.$v.instructionGuide.$anyError){
+      //   return;
+      // }
+
+      // posts data
+      try{
+   await PostsService.deletePostById(this.$store.state.route.params.postId);
+      this.$router.push({
+        name: 'browse',
+        params: {
+          postId: this.$store.state.route.params.postId
+        }
+        });
+      }catch(error){
+        console.log(error)
+      }
+    },
+  },
   async mounted() {
     const postId = this.$store.state.route.params.postId;
     console.log(postId)
     this.post = 
     (await PostsService.getPostById(postId)).data;
-  }
+  },
+
 };
 </script>
 
@@ -73,21 +108,14 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&display=swap');
 
 .outer-row{
-  flex-wrap:nowrap;
-}
-.location .input-group > .form-control{
-  width:100%;
-  font-family: 'Mulish', sans-serif;
-}
-.input-group{
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
 }
 
 #sidebarMenu{
   /* margin:1rem 0 1rem 1rem; */
   background-color:#DFEFE1;
   border: 1px solid #DFEFE1;
-  border-radius:5px;
+  border-radius:0 5px 5px 0;
   margin-bottom:2rem;
 }
 
@@ -128,13 +156,7 @@ export default {
   margin-bottom:0;
   font-family: 'Mulish', sans-serif;
 }
-.btn-block{
-  text-align:left;
-}
 
-.bi-flower1 .bi-geo-alt .bi-cash {
-  color:#495057;
-}
 .btn-filter {
   background-color:#AED1B1;
   color:#fff;
@@ -150,6 +172,36 @@ export default {
   max-width: 50%;
   padding: 1rem 0;
 }
-/* posts */
+.main-heading{
+  text-transform: capitalize;
+}
+.btn-post{
+  width:100%;
+  font-family: 'Mulish', sans-serif;
+  font-size:1.2rem;
+  background-color: #AED1B1;
+  color: #fff;
+  border:none;
+  margin-left:1rem;
+}
+.btn-post:hover{
+  background-color: #AED1B1;
+  color: #4a4c4e;
+}
+@media (min-width: 576px){
+.post-container{
+    max-width:100%;
+    padding: 2rem 1rem;
+}
+}
+@media (max-width: 576px){
 
+.main-heading{
+  margin:auto;
+}
+.bottom >>> span{
+  margin:auto;
+  margin-top:1rem;
+}
+}
 </style>

@@ -3,34 +3,34 @@
          <b-row>
            <!-- post image col -->
            <b-col cols="12" lg="6" >
-             <b-img :src="postImg" fluid-grow alt=""></b-img>
+             <b-img class="post-image" :src="post.image" fluid-grow alt=""></b-img>
            </b-col>
            <!-- end post image col -->
 
            <!-- post text col -->
            <b-col cols="10" lg="5">
-                  <h2 class="tbl-header">Granny Smith Apples</h2>
+                  <h2 class="tbl-header">{{post.title}}</h2>
              <b-row class="post-table-row">
                
                     <b-col cols="1" class="tbl-icon">
                      <b-icon icon="calendar2-event"></b-icon>
                      </b-col>
-                   <b-col cols="5" class="tbl-text d-flex">Today 3:40pm</b-col>
+                   <b-col cols="5" class="tbl-text d-flex">{{post.dateTime}}</b-col>
                    <b-col cols="1" class="tbl-icon">
                      <b-icon icon="clock"></b-icon>
                      </b-col>
-                   <b-col cols="5" class="tbl-text">Ready Now</b-col>
+                   <b-col cols="5" class="tbl-text">{{post.ready}}</b-col>
               </b-row> 
 
             <b-row  class="post-table-row">
                    <b-col cols="1" class="tbl-icon">
                      <b-icon icon="geo-alt"></b-icon>
                      </b-col>
-                   <b-col cols="5" class="tbl-text">2km</b-col>
+                   <b-col cols="5" class="tbl-text">{{post.userCity}}</b-col>
                     <b-col cols="1" class="tbl-icon">
                      <b-icon icon="check"></b-icon>
                      </b-col>
-                   <b-col cols="5" class="tbl-text">Organic</b-col>
+                   <b-col cols="5" class="tbl-text">{{post.isOrganic}}</b-col>
                
               </b-row>
             </b-col>
@@ -38,14 +38,18 @@
 
             <!-- post icon col -->
             <b-col cols="2" lg="1" class="post-icon ">
-              <img :src="postIcon" class="img-fluid" alt="">
+              <img v-if="post.category === 'fruit'" :src="postFruit" class="img-fluid" alt="">
+              <img v-else-if="post.category === 'vegetable'" :src="postVeg" class="img-fluid" alt="">
+              <img v-else-if="post.category === 'herbs'" :src="postHerbs" class="img-fluid" alt="">
+              <img v-else-if="post.category === 'animal'" :src="postAnimal" class="img-fluid" alt="">
             </b-col>
             <!-- end post icon col -->
             <!-- post bottom -->
             <b-row class="align-items-center post-bottom">
-            <b-col cols="6" class="price-bottom"><p>$5.00/dozen</p></b-col>
+            <b-col v-if="post.price === 'free'" cols="4" class="price-bottom"><p>FREE</p></b-col>
+            <b-col v-else cols="4" class="price-bottom"><p>${{post.price}}/{{post.unit}}</p></b-col>
            
-            <b-col cols="6" class="text-center">
+            <b-col cols="8" class="post-descript text-center">
               <p>{{post.description}}</p>
               </b-col>
           </b-row>
@@ -55,17 +59,20 @@
 </template>
 
 <script>
-import postImg from '@/assets/dill.png';
-import postIcon from '@/assets/post-icon.png';
-import userImg from '@/assets/user.png';
+import postVeg from '@/assets/vegpost.png';
+import postAnimal from '@/assets/postanimal.png';
+import postFruit from '@/assets/postfruit.png';
+import postHerbs from '@/assets/herbspost.png';
+import PostsService from '@/services/PostsService'
 export default {
   name: "Post",
 
   data() {
     return{
-      postImg: postImg,
-      postIcon: postIcon,
-      userImg: userImg,
+      postAnimal: postAnimal,
+      postVeg: postVeg,
+      postFruit: postFruit,
+      postHerbs: postHerbs,
       post: null
   }},
   async mounted() {
@@ -123,32 +130,19 @@ export default {
 }
 .price-bottom p {
   margin-bottom:0;
-  text-align: center;
+  text-align: left;
   font-weight: bolder;
   font-size:2vw;
   font-family: 'Mulish', sans-serif;
 
 }
-.img-bottom img{
-  width: 4vw;
-  height: 4vw;
-  object-fit: cover;
-  
-}
-.img-bottom{
-  margin:auto;
-  display:flex;
-  align-items: center;
-  
-}
-.img-bottom p {
-  margin-bottom:0;
-  padding-left:10px;
+.post-descript p{
   font-family: 'Mulish', sans-serif;
-  font-weight: bolder;
-  font-size:2vw;
-
+  text-transform: capitalize;
+  text-align: left;
+   margin-bottom:0;
 }
+
 .btn-post{
   width:100%;
   font-family: 'Mulish', sans-serif;
@@ -161,5 +155,34 @@ export default {
   background-color: #AED1B1;
   color: #4a4c4e;
 }
+.post-image{
+      max-height: 60vh;
+    object-fit: cover;
+}
+@media (max-width: 768px){
+ .price-bottom p {
+    font-size:4.5vw;
+}
+.post-bottom{
+   margin: 4vh 0 2vh 0;
+}
+.post-icon{
+    margin-top: 1rem;
+}
+.tbl-header{
+  margin-top:1rem;
+}
+.post-descript p{
+  font-size:3vw;
+  text-align: center;
+}
+}
+@media (min-width: 576px){
+.post-container{
+    max-width:100%;
+    padding: 2rem 1rem;
 
+}
+
+}
 </style>

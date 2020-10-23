@@ -3,8 +3,8 @@
     <div class="row justify-content-center">
       <div class="col-8 py-5">
         <!--Login Bootstrap Card-->
-        <b-card class="text-center shadow-lg bg-light mt-5">
-          <h4 slot="header" class="text-primary m-0">Register</h4>
+        <b-card class="text-center shadow-lg mt-5">
+          <h4 slot="header" class="header m-0">Register</h4>
            
             <b-form-input type="text" name="username" placeholder="Username" v-model="username"></b-form-input>
           <b-form-input type="email" name="email" placeholder="email" v-model="email" class="mb-3"></b-form-input>
@@ -19,7 +19,7 @@
             v-html="error"
             class="error mt-3"
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
-          <b-button variant="primary" class="w-100" @click="register">Register</b-button>
+          <b-button class="btn w-100" @click="register">Register</b-button>
         </b-card>
         <!-- /Login Bootstrap Card-->
       </div>
@@ -65,6 +65,7 @@ export default {
           postal: this.postal,
           profileimg: this.profileimg
         });
+        this.$router.push({name: 'browse'})
       } catch (error) {
         console.log(error);
         this.error = error.response.data.error;
@@ -79,20 +80,23 @@ export default {
 .error {
   color: red;
 }
-
-h3 {
-  margin: 40px 0 0;
+.header{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
+  color: #ED5E09;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.btn{
+  background-color:#ED5E09;
+  color:#fff;
+  text-align: center;
+  border:none;
+  font-family: 'Mulish', sans-serif;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.btn:hover{
+   background-color:#f7ae84;
+  border:none;
 }
-a {
-  color: #42b983;
+.form-control, .custom-select{
+  margin-bottom: 1rem;
 }
-
 </style>

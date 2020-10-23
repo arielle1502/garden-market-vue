@@ -9,5 +9,11 @@ export default {
   },
   getPostById(postId){
     return Api().get(`posts/${postId}`)
+  },
+  putPostById(postId, post){
+    return Api().put(`posts/${postId}`,post)
+  },
+  deletePostById(postId){
+    return Api().delete(`posts/${postId}`)
   }
 }

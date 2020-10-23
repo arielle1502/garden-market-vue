@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 
 // This allows vue to access the store
 Vue.use(Vuex)
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     user: null,
     isUserLoggedIn: false
   },
+  plugins: [createPersistedState()],
   // Mutation in vuex allow us to modify the state these mutations can be tracked using the Vue debug tools
   // Mutation can not be called directly you must call a action that calls a mutation
   mutations: {

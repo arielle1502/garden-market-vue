@@ -1,4 +1,5 @@
 // const { DataTypes } = require("sequelize/types");
+const moment = require('moment'); // require
 
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post',
@@ -8,13 +9,20 @@ module.exports = (sequelize, DataTypes) => {
           image: { type: DataTypes.STRING },
           isOrganic: { type: DataTypes.STRING },
           price: { type: DataTypes.STRING },
+          ready: { type: DataTypes.STRING},
           unit: { type: DataTypes.STRING },
           description: { type: DataTypes.TEXT },
           UserId: { type: DataTypes.INTEGER},
           author: { type: DataTypes.STRING },
           userImg: { type: DataTypes.STRING},
           userCity: { type: DataTypes.STRING},
-          userEmail: { type: DataTypes.STRING }
+          userEmail: { type: DataTypes.STRING },
+          dateTime: { 
+            type: DataTypes.DATEONLY,
+            get: function(){
+              return moment(this.getDataValue('datetime')).format("MMM Do YY")
+            }
+          }
 
       },
       

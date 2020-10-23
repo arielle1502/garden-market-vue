@@ -2,7 +2,7 @@
  <div>
   <b-container fluid>
     <b-row class="outer-row">
-      <b-col cols="12" md="4" lg="3" id="sidebarMenu" class=" ml-3 d-md-block sidebar" align-h="start">
+      <b-col cols="12" md="4" lg="3" id="sidebarMenu" class="d-md-block sidebar" align-h="start">
         <div class="sidebar-sticky pt-3">
           <!-- search input -->
               <b-input-group class="mb-2">
@@ -78,7 +78,7 @@
         <!-- main section -->
         <b-col cols="12" md="7" lg="8">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Latest</h1>
+          <!-- <h1 class="h2">Latest</h1> -->
           </div>
         <CreatePostForm/>
           
@@ -115,7 +115,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&display=swap');
 
 .outer-row{
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
 }
 .location .input-group > .form-control{
   width:100%;
