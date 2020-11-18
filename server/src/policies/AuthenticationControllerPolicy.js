@@ -10,10 +10,10 @@ module.exports = {
             password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')),
               // this says it has to contain letters a to z, numbers 1 to 9 and a max of 32 characters, min of 8
             street: Joi.string(),
-            city: Joi.string().alphanum().min(2).max(20),
+            city: Joi.string().trim().min(2).max(20),
             state: Joi.string().alphanum().min(2).max(30),
             postal: Joi.number(),
-            profileimg: Joi.string().min(2).max(150)
+            profileimg: Joi.string().min(2).max(350)
             
         });
         //Using Joi schema to validate user data

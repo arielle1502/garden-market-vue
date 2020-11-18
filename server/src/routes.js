@@ -1,5 +1,6 @@
 const AuthenticationController = require('./controllers/AuthenticationController');
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
+const PostControllerPolicy = require('./policies/PostControllerPolicy')
 const PostController = require('./controllers/PostController')
 
 module.exports = (app) => {
@@ -13,9 +14,9 @@ module.exports = (app) => {
     AuthenticationController.login);
 
     app.get('/posts', PostController.getAllPosts)
-    app.post('/posts', PostController.postPosts)
+    app.post('/posts',PostControllerPolicy.postPost, PostController.postPosts)
     app.get('/posts/:postId', PostController.getPostById)
-    app.put('/posts/:postId', PostController.putPostById)
+    app.put('/posts/:postId',PostControllerPolicy.postPost, PostController.putPostById)
     app.delete('/posts/:postId', PostController.deletePostById)
     
 }

@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../components/Home.vue'
+// import Home from '../components/Home.vue'
 import Register from '../components/Register.vue'
 import Login from '../components/Login.vue'
 import Browse from '../components/Browse.vue'
 import CreatePost from '../components/CreatePost.vue'
 import ViewPost from '../components/ViewPost.vue'
 import EditPost from '../components/EditPost.vue'
+import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,7 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Browse
   },
   {
     path: '/register',
@@ -63,6 +64,11 @@ Vue.use(VueRouter)
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: EditPost
+  },
+  {
+    path: '*',
+    name: 'Not Found',
+    component: NotFound
   }
 ]
 
