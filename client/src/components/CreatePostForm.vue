@@ -7,15 +7,9 @@
              
               <b-col cols="12" md="6">
                 <b-form-group id="title-group" label="Title:" label-for="title" description="Enter the Food Item That You Are Listing">
-                  <!--v-model - Binds the data to the validator -->
-                  <!--:state - Stores the logic that checks if the field data is valid -->
-                  <!--aria-describedby="title-feedback" - Refers to the feedback that should display if the datat is invalid-->
+                  
                   <b-form-input id="title" type="text" required placeholder="Enter Title" v-model="post.title" ></b-form-input>
 
-                    <!-- v-model="$v.instructionGuide.title.$model" :state="$v.instructionGuide.title.$dirty ? !$v.instructionGuide.title.$error : null" aria-describedby="title-feedback"></b-form-input>
-                  <b-form-invalid-feedback id="title-feedback">
-                    This is a required field and must be at least 3 characters.
-                  </b-form-invalid-feedback> -->
                 </b-form-group>
                 <b-form-group id="category-group" label="Category:" label-for="category" description="Please Enter the Food Category">
                   <b-form-select id="category"  v-model="post.category" :options="catOptions"></b-form-select>

@@ -15,7 +15,7 @@
                <!-- panel heading -->
                  <b-list-group >
             <b-list-group-item class="panel-heading">
-              <h2>DISCOVER YOUR NEIGHBOUR'S BAKCYARD BOUNTY </h2>
+              <h2>DISCOVER YOUR NEIGHBOUR'S BACKYARD BOUNTY </h2>
             </b-list-group-item>
             </b-list-group>
             <!-- end panel heading -->

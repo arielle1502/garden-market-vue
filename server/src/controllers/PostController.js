@@ -12,7 +12,7 @@ async getAllPosts (req, res) {
     res.send(posts);
   } catch (err) {
     res.status(500).send({
-       error: 'An error has occurred trying to get all Instruction Guides'
+       error: 'An error has occurred trying to get all posts'
     })
   }
 },
