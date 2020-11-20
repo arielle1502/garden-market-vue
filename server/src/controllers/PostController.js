@@ -40,15 +40,14 @@ async postPosts (req, res) {
     }
   },
   async putPostById(req, res){
+    console.log(req.body)
     try {
       const post = await Post.update(req.body, {
         where: {id: req.params.postId}
     })
       res.send(post);
     } catch (err) {
-      res.status(500).send({
-         error: 'An error has occurred trying to update a post'
-      })
+      res.status(500).send(err)
     }
   },
   async deletePostById(req, res){
